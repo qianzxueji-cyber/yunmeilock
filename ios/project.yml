@@ -1,0 +1,57 @@
+name: YunmeiLock
+options:
+  bundleIdPrefix: cc.xypp
+  deploymentTarget:
+    iOS: "16.0"
+  developmentLanguage: zh-Hans
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    SWIFT_STRICT_CONCURRENCY: minimal
+    IPHONEOS_DEPLOYMENT_TARGET: "16.0"
+    CODE_SIGN_STYLE: Automatic
+    TARGETED_DEVICE_FAMILY: "1,2"
+targets:
+  YunmeiLock:
+    type: application
+    platform: iOS
+    sources:
+      - path: YunmeiLock
+        excludes:
+          - Info.plist
+          - YunmeiLock.entitlements
+    entitlements:
+      path: YunmeiLock/YunmeiLock.entitlements
+      properties:
+        com.apple.developer.nfc.readersession.formats:
+          - NDEF
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.qianzxueji.yunmeilock
+        INFOPLIST_FILE: YunmeiLock/Info.plist
+        GENERATE_INFOPLIST_FILE: "NO"
+        CODE_SIGN_ENTITLEMENTS: YunmeiLock/YunmeiLock.entitlements
+    attributes:
+      SystemCapabilities:
+        com.apple.NearFieldCommunicationTagReading:
+          enabled: 1
+  YunmeiLockTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - Tests/YunmeiLockTests
+    dependencies:
+      - target: YunmeiLock
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.qianzxueji.yunmeilock.tests
+        GENERATE_INFOPLIST_FILE: YES
+schemes:
+  YunmeiLock:
+    build:
+      targets:
+        YunmeiLock: all
+        YunmeiLockTests: [test]
+    test:
+      targets:
+        - YunmeiLockTests

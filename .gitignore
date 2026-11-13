@@ -1,0 +1,11 @@
+# 构建产物
+ios/build/
+ios/YunmeiLock.xcodeproj/
+ios/YunmeiLock-unsigned.ipa
+ios/Payload/
+dist/
+*.ipa
+
+# 系统/编辑器
+.DS_Store
+*.xcuserstate
